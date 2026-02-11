@@ -3,156 +3,103 @@ Your goal is to provide *personalized appliance recommendations* to optimize
 comfort, air quality, and energy efficiency — based on **indoor/outdoor conditions**,
 **user feedback**, and **room configuration**.
 
----
+--------------------------------------------------
 
-###  ROOM INFORMATION
-- Name: Sujoy Sir Cabin
-- Dimensions (Length × Width × Height): 15m × 10m × 15m
-- Occupancy: 3
-- Number of Doors: 1
-- Number of Windows: 1
+### ROOM INFORMATION
+- Room_ID: <ROOM_NAME>
+- Dimensions: <L> × <W> × <H>
+- Occupancy: <N>
+- Doors: <N>
+- Windows: <N>
 
-###  AVAILABLE APPLIANCES
-{'AC': True, 'CEILING_FAN': True, 'EXHAUST_FAN': False, 'WINDOW': True, 'DOOR': True}
-
----
-
-###  USER INFORMATION
-- Name: Prashanth
-- Age: 23
-- Gender: Male
-- Ethnicity: Indian
-- Health Issues: ['sinusitis']
-
-**Recent Comfort Feedback:**
-Question: Do you ever wake up with any of the following? (Select all that apply)
-User answered: Stuffy nose or congestion, Difficulty breathing, Coughing or wheezing
-
-Question: Do you find that temperature affects your focus and energy levels?
-User answered: Yes, I focus better when it’s warm
-
-Question: How do you prefer the temperature in your space with respect to comfort?
-User answered: It depends on the season
-
-Question: Which cooling method do you use most? (Select all that apply)
-User answered: Ceiling fan, Air conditioner, Open windows for natural ventilation
-
-Question: When do you usually turn on the fan? (Select all that apply)
-User answered: As soon as it feels slightly warm, When it’s hot, but not unbearable
-
-Question: When do you usually turn on the air cooler or AC? (Select all that apply)
-User answered: As soon as the temperature crosses 30°C (86°F), Only in extreme heat waves (above 38°C/100°F)
-
-Question: When do you usually turn on the heater? (Select all that apply)
-User answered: I don’t use a heater
-
-Question: Which seasons do you feel most comfortable in? (Select all that apply)
-User answered: Post-monsoon/autumn (October–November), Monsoon (June–September), Summer (March–June)
-
-Question: Which seasons do you struggle with due to temperature or air quality? (Select all that apply)
-User answered: Winter (cold air, smog, dryness)
-
-Question: Do you have any respiratory conditions? (Select all that apply)
-User answered: I don’t have any respiratory conditions
-
-Question: How often do you experience discomfort due to air quality?
-User answered: A few times a week
-
-Question: How do you feel about fresh air circulation in your space?
-User answered: I need fresh air and keep windows open whenever possible
-
-Question: Do you feel drowsy or fatigued in a space without fresh air?
-User answered: Yes, I notice a big difference
-
-Question: Do you notice if a room is too dry or too humid?
-User answered: Yes, I can tell right away
-
-Question: Do you ever get headaches or dizziness in polluted or poorly ventilated spaces?
-User answered: Rarely/Never
-
-Question: Which air conditions make you feel uncomfortable? (Select all that apply)
-User answered: Stuffy, stagnant air, Air pollution (smog, dust, vehicle exhaust)
-
-Question: Which of these affect your breathing or comfort the most? (Select all that apply)
-User answered: Dust accumulation indoors, Outdoor air pollution (smog, PM2.5, industrial pollution), Smoke from cooking, incense, or roadside burning, Humid, sticky air during monsoon, Dry, dusty air during winter
-
-Question: Do you notice a difference in your breathing in different Indian cities/environments?
-User answered: Yes, I breathe better in small towns and villages
-
-Question: How do you feel about air circulation while you sleep?
-User answered: It depends on the temperature
-
-Question: What are the biggest air-related comfort issues you’ve noticed in your home or work environment? (Select all that apply)
-User answered: Too much dust buildup, Humid air that feels sticky and heavy, Stuffy air that makes me feel tired
-
-Question: Which factors make the air in a space feel the most comfortable for you? (Select all that apply)
-User answered: Good air circulation (windows open or airflow), Proper humidity balance (not too dry or too humid), Minimal dust and allergens, Low levels of pollution (less smoke, smog, vehicle exhaust)
-
-
----
-
-Keep in mind that it is currently Winter season and the time of day is Evening.
-
-###  INDOOR ENVIRONMENT AND POLLUTANT DATA
-{'temperature': 25.65, 'humidity': 60.06, 'pressure': 1012, 'pm1': 136, 'pm2_5': 242, 'pm10': 261, 'co': 0.000242, 'voc': 1.047, 'co2': 822, 'timestamp': None}
-
-###  OUTDOOR ENVIRONMENT AND POLLUTANT DATA
-{'pm10': 95.9, 'pm2_5': 95.7, 'carbon_monoxide': 747, 'dust': 1, 'temperature_2m': 22.4, 'relative_humidity_2m': 68, 'wind_speed_10m': 4.2, 'wind_direction_10m': 290, 'wind_gusts_10m': 7.2, 'rain': 0, 'precipitation': 0, 'is_day': 1, 'weather': 'Winter', 'timeOfDay': 'Evening', 'month': 12, 'timestamp': '2025-12-01 16:55:00'}
-
----
-###  SIMILAR PAST CASES (if available)
-These are previous situations with similar indoor temperature, humidity and PM2.5
-that the user found uncomfortable. Use these patterns to improve your decision.
-
-No similar past cases were found for this environment.
-
-### YOUR PREVIOUS RECOMMENDATION WAS
-
-    **Previous Actions Taken:**
-    - AC: OFF at 25°C
-- Ceiling Fan: Speed 3
-- Window: CLOSED
-- Door: CLOSED
-- Exhaust Fan: N/A
-- Recheck After: 15 min
-
-    **Previous Rationale (short summary):**
-    Indoor PM2.5 was (241), temperature 25.61°C, humidity 59.99%. The system attempted to improve air quality and comfort.
-
-
-
----
-
-###  GOAL
-You must analyze all the above data and **recommend appliance settings** that:
-1. Improve thermal comfort (temperature & humidity balance, air movement).
-2. Maintain healthy indoor air quality (minimize pollutants like CO₂, VOC, PM2.5).
-3. Respect user health conditions (e.g., asthma → avoid dust or VOCs).
-4. Respond to outdoor air conditions (e.g., close windows if outdoor AQI is poor).
-5. Optimize energy efficiency without compromising comfort.
-
----
-
-###  CONSTRAINTS
-Your response must strictly follow these constraints:
-Stay within valid ranges and allowed values:
-- `AC_MODE`: one of ['OFF', 'COOL', 'FAN']
-- `AC_TEMPERATURE`: integer between 16–30°C
-- `CEILING_FAN`: integer between 0–5
-- `WINDOW`: 'OPEN' or 'CLOSED'
-- `DOOR`: 'OPEN' or 'CLOSED'
-- `RECHECK_AT`: integer number of minutes to re-evaluate the environment
-
----
-
-###  OUTPUT FORMAT
-Return your output **strictly in valid JSON**, following this schema:
+### AVAILABLE APPLIANCES
 {
-  "reason": "Brief explanation of why each setting was chosen.",
-  "AC_MODE": "COOL",
-  "AC_TEMPERATURE": 23,
-  "CEILING_FAN": 3,
-  "WINDOW": "CLOSED",
-  "DOOR": "CLOSED",
-  "RECHECK_AT": 15
+  "AC": true/false,
+  "CEILING_FAN": true/false,
+  "EXHAUST_FAN": true/false,
+  "WINDOW": true/false,
+  "DOOR": true/false
+}
+
+--------------------------------------------------
+
+### USER PROFILE
+- Age: <AGE>
+- Health Conditions: <LIST>
+- Seasonal Comfort Preference: <TEXT>
+- Air Quality Sensitivity: <TEXT>
+- Ventilation Preference: <TEXT>
+
+Recent Comfort Feedback:
+<Structured user survey responses>
+
+--------------------------------------------------
+
+### CURRENT CONTEXT
+- Season: <SEASON>
+- Time of Day: <TIME_OF_DAY>
+
+--------------------------------------------------
+
+### INDOOR ENVIRONMENT DATA
+{
+  "temperature": <float>,
+  "humidity": <float>,
+  "pm2_5": <float>,
+  "pm10": <float>,
+  "co": <float>,
+  "voc": <float>,
+  "co2": <float>
+}
+
+### OUTDOOR ENVIRONMENT DATA
+{
+  "pm2_5": <float>,
+  "pm10": <float>,
+  "temperature": <float>,
+  "humidity": <float>,
+  "wind_speed": <float>,
+  "weather": <TEXT>
+}
+
+--------------------------------------------------
+
+### PREVIOUS SYSTEM ACTION
+- AC_MODE: <VALUE>
+- CEILING_FAN: <VALUE>
+- WINDOW: <VALUE>
+- DOOR: <VALUE>
+- RECHECK_AT: <VALUE>
+
+--------------------------------------------------
+
+### GOAL
+Recommend appliance settings that:
+- Improve comfort
+- Reduce pollutants
+- Protect user health
+- Consider outdoor air
+- Optimize energy
+
+--------------------------------------------------
+
+### CONSTRAINTS
+- AC_MODE ∈ ['OFF','COOL','FAN']
+- AC_TEMPERATURE ∈ [16–30]
+- CEILING_FAN ∈ [0–5]
+- WINDOW ∈ ['OPEN','CLOSED']
+- DOOR ∈ ['OPEN','CLOSED']
+- RECHECK_AT ∈ integer (minutes)
+
+--------------------------------------------------
+
+### OUTPUT FORMAT (STRICT JSON)
+{
+  "reason": "...",
+  "AC_MODE": "...",
+  "AC_TEMPERATURE": <int or null>,
+  "CEILING_FAN": <int>,
+  "WINDOW": "...",
+  "DOOR": "...",
+  "RECHECK_AT": <int>
 }

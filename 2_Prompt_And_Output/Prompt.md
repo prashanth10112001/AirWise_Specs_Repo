@@ -2,7 +2,7 @@
 
 This folder contains:
 
-1. `prompt.txt` — The full input prompt given to the AirWise LLM for appliance control.
+1. `prompt.txt` — The file prompt_template.txt represents the structured prompt design used in AirWise. Instance-specific identifiers and user details have been anonymized for privacy.
 2. `sample_output.json` — A representative LLM response in JSON format, showing recommended appliance settings for a sample indoor/outdoor environment and user profile.
 
 The output JSON strictly follows the schema defined in the prompt:

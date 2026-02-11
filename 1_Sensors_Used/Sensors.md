@@ -1,7 +1,6 @@
 # Sensors Used in AirWise Deployment
 
-This document lists the exact hardware components used in the AirWise: LLM-Powered Smart Air Quality
-Monitoring and Automated Appliance Control.
+This document provides the detailed hardware specifications of the Environmental Monitoring Device (EMD) deployed in AirWise: LLM-Powered Smart Air Quality Monitoring and Automated Appliance Control.
 
 ---
 
